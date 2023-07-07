@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "kasa-exporter"
+version = "0.1.0"
+description = ""
+authors = ["Crec0 <83436716+Crec0@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "kasa_exporter"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pkcs7 = "^0.1.2"
+prometheus-client = "^0.17.0"
+setuptools = "^68.0.0"
+pyyaml = "^6.0"
+schedule = "^1.2.0"
+httpx = "^0.24.1"
+fastapi = "^0.99.1"
+uvicorn = {extras = ["standard"], version = "^0.22.0"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,19 @@
+common:
+    # The bottom 5 settings can be defined globally for all plugs or individually for each plug
+    # Anything defined here will be used over the global configs
+    email: your_tplink_email
+    password: your_super_strong_tp_link_password
+    interval: 30 # (seconds) what scrape interval should the exporter use
+
+prometheus:
+    port: 9089
+    endpoint: /metrics
+
+plugs:
+    -   name: super-fancy-name # desired name of the KP125M plug
+        addr: 123.123.123.123 # address of the KP125M plug
+        # The bottom 5 settings can be defined globally for all plugs or individually for each plug
+        # Anything defined here will be used over the global configs
+        email: your_tplink_email
+        password: your_super_strong_tp_link_password
+        interval: 30 # (seconds) what scrape interval should the exporter use
