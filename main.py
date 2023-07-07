@@ -9,7 +9,6 @@ from prometheus_client import Gauge, Counter, CollectorRegistry, make_asgi_app
 from kasa.config import Config, PlugConfig
 from kasa.kasa_smart_plug import KasaSmartPlug
 
-
 REGISTRY = CollectorRegistry()
 STATUS = Gauge("kasa_online", "Device online", ["name"], registry=REGISTRY)
 RELAY_STATE = Gauge("kasa_relay_state", "Relay state (switch on/off)", ["name"], registry=REGISTRY)
@@ -59,8 +58,16 @@ def scrape(plug_configs: list[PlugConfig]):
 app = FastAPI(debug=True)
 app.mount("/metrics", make_asgi_app(registry=REGISTRY))
 
-if __name__ == '__main__':
+
+def main():
     config = Config.read_config("config.yml")
-    Thread(target=scrape, args=[config.plugs]).start()
+
+    scrapper_thread = Thread(target=scrape, args=[config.plugs])
+    scrapper_thread.daemon = True
+    scrapper_thread.start()
 
     uvicorn.run("main:app", port=config.prometheus.port, log_level="debug")
+
+
+if __name__ == '__main__':
+    main()
