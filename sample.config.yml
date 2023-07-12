@@ -5,9 +5,7 @@ common:
     password: your_super_strong_tp_link_password
     interval: 30 # (seconds) what scrape interval should the exporter use
 
-prometheus:
-    port: 9089
-    endpoint: /metrics
+prometheus_port: 9089
 
 plugs:
     -   name: super-fancy-name # desired name of the KP125M plug

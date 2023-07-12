@@ -5,11 +5,6 @@ import yaml
 from pydantic import BaseModel, validator
 
 
-class PrometheusConfig(BaseModel):
-    port: int
-    endpoint: str
-
-
 class PlugConfig(BaseModel):
     name: str
     addr: str
@@ -38,7 +33,7 @@ class PlugConfig(BaseModel):
 
 @dataclass
 class Config:
-    prometheus: PrometheusConfig
+    prometheus_port: int
     plugs: list[PlugConfig]
 
     @staticmethod
@@ -55,6 +50,5 @@ class Config:
             PlugConfig(**(deepcopy(data['common'] | plug)))
             for plug in data['plugs']
         ]
-        prometheus_config = PrometheusConfig(**data['prometheus'])
 
-        return Config(prometheus_config, populated_plugs)
+        return Config(data['prometheus_port'], populated_plugs)
