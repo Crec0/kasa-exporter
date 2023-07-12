@@ -38,5 +38,22 @@ class KasaSmartPlug:
         return self.__auth.send_request({
             "method": "get_energy_data",
             "params": {"start_timestamp": start, "end_timestamp": end, "interval": interval},
-            "requestTimeMils": int(round(time.time() * 1000)),
+            "requestTimeMils": round(time.time() * 1000),
+        })
+
+    def more_info(self) -> dict:
+        """
+        get_electricity_price_config
+        get_current_power
+        get_protection_power
+        get_max_power
+        get_led_info
+        get_power_data # requires same params from energy data
+        """
+        return self.__auth.send_request({
+            "method": "get_led_info",
+            # "params": {
+            #     "start_timestamp": round(time.time()) - 86400, "end_timestamp": round(time.time()), "interval": 60
+            # },
+            "requestTimeMils": round(time.time() * 1000),
         })
